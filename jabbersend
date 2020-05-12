@@ -1,0 +1,60 @@
+#!/usr/bin/env ruby
+
+# Original script by Harisankar P S (https://github.com/coderhs)
+# at https://github.com/xmpp4r/xmpp4r/blob/master/data/doc/xmpp4r/examples/basic/jabbersend.rb
+#
+# This script will send a jabber message to the specified JID by the '-t' option.
+# The subject can be specified using the '-s' option, and the body can be
+# specified using the '-b' option. If the body is omitted, it will be taken from
+# stdin on run.
+
+# settings
+myJID = ''
+myPassword = ''
+##########
+
+require 'optparse'
+require 'xmpp4r'
+include Jabber
+
+if myJID.empty? || myPassword.empty?
+  puts "Please fill myJID and myPassword in the script."
+  exit 1
+end
+
+myJID = JID.new(myJID)
+to = nil
+subject = ''
+body = nil
+OptionParser.new do |opts|
+  opts.banner = 'Usage: jabbersend [-b \'body\'] -s \'subject\' -t dest@domain'
+  opts.separator ''
+  opts.on('-s', '--subject SUBJECT', 'sets the message\'s subject') {
+    |s| subject = s }
+  opts.on('-b', '--body BODY', 'sets the message\'s body') { |b| body = b }
+  opts.on('-t', '--to JID', 'sets the receiver') { |t| to = JID.new(t) }
+  opts.on_tail('-h', '--help', 'show this message') {
+    puts opts
+    exit
+  }
+  opts.parse!(ARGV)
+end
+
+if to.nil?
+  puts "No receiver specified. See jabbersend -h"
+  exit 1
+end
+
+if body.nil?
+  puts "No body provided, so you can grab one now.\n\n"
+  body = STDIN.readlines.join
+end
+
+cl = Client.new(myJID)
+cl.connect
+cl.auth(myPassword)
+
+m = Message.new(to, body).set_type(:normal).set_id('1').set_subject(subject)
+puts m.to_s
+cl.send(m)
+cl.close
