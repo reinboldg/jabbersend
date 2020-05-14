@@ -7,7 +7,7 @@ https://github.com/xmpp4r/xmpp4r/blob/master/data/doc/xmpp4r/examples/basic/jabb
 
 ## Setup
 
-### Prerequisites
+Prerequisites
 
 
 - Ruby 2.5.8+
@@ -75,5 +75,6 @@ Help
 
 
     jabbersend -h
+
 
 
