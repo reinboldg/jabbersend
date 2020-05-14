@@ -26,6 +26,12 @@ Then, install `xmpp4r` gem:
     gem install xmpp4r
 
 
+or if you want to install the gem only for your user:
+
+
+    gem install --user-install xmpp4r
+
+
 Install the script
 
 
