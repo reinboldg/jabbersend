@@ -71,6 +71,12 @@ Send a message
     jabbersend -t dest@example.com -s "This is a test" -b "Hello, how are you?"
 
 
+or by this way
+
+
+    echo "Today is a beautiful day!" | jabbersend -t dest@example.com -s "This is another test"
+
+
 Help
 
 
