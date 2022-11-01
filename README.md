@@ -23,12 +23,6 @@ Example, to install Ruby and RubyGems on FreeBSD:
 Then, install `xmpp4r` gem:
 
 
-    gem install xmpp4r
-
-
-or if you want to install the gem only for your user:
-
-
     gem install --user-install xmpp4r
 
 
@@ -36,7 +30,7 @@ Install the script
 
 
     mkdir ~/bin
-    git clone https://github.com/greinbold/jabbersend
+    git clone https://github.com/reinboldg/jabbersend.git jabbersend
     cp jabbersend/jabbersend ~/bin/
     chmod 700 ~/bin/jabbersend
 
